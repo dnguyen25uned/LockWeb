@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>LockWeb</title>
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <div class="popup-shell">
+      <div class="popup-glow" aria-hidden="true"></div>
+
+      <header class="popup-header">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4.5" y="10" width="15" height="10.5" rx="2.4"></rect>
+              <path d="M8.2 10V7.4a3.8 3.8 0 0 1 7.6 0V10"></path>
+              <circle cx="12" cy="15.2" r="1.2" fill="currentColor" stroke="none"></circle>
+            </svg>
+          </span>
+          <span class="brand-name">LockWeb</span>
+        </div>
+        <span class="status-pill is-neutral" id="status-pill">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="status-text">Đang tải…</span>
+        </span>
+      </header>
+
+      <main class="popup-main">
+        <div class="loading-state" id="loading-state" role="status" aria-live="polite">
+          <span class="spinner" aria-hidden="true"></span>
+          <span>Đang kiểm tra…</span>
+        </div>
+
+        <div id="content" hidden>
+          <section class="state-hero">
+            <div class="hero-icon" id="hero-icon" aria-hidden="true">
+              <svg class="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4.5" y="10" width="15" height="10.5" rx="2.4"></rect>
+                <path d="M8.2 10V7.4a3.8 3.8 0 0 1 7.6 0V10"></path>
+                <circle cx="12" cy="15.2" r="1.2" fill="currentColor" stroke="none"></circle>
+              </svg>
+            </div>
+            <h1 id="hero-title">Đang tải…</h1>
+            <p id="hero-copy">Vui lòng chờ trong giây lát.</p>
+          </section>
+
+          <div class="info-grid">
+            <div class="info-cell">
+              <span>Mật khẩu</span>
+              <strong id="password-info">—</strong>
+            </div>
+            <div class="info-cell">
+              <span>Tự khóa</span>
+              <strong id="autolock-info">—</strong>
+            </div>
+          </div>
+
+          <button class="primary-button" id="lock-button" type="button">
+            <span class="button-spinner" aria-hidden="true"></span>
+            <span id="lock-button-label">Khóa ngay</span>
+          </button>
+
+          <button class="secondary-button" id="options-button" type="button">
+            <span id="options-button-label">Mở Cài đặt</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m14 6 6 6-6 6"></path>
+            </svg>
+          </button>
+
+          <p class="shortcut-hint" id="shortcut-hint"></p>
+          <p class="inline-message" id="popup-error" role="alert" hidden></p>
+        </div>
+      </main>
+
+      <footer class="popup-footer">
+        <span class="footer-dot" aria-hidden="true"></span>
+        Dữ liệu cục bộ · Không gửi ra ngoài
+      </footer>
+    </div>
+  </body>
+</html>

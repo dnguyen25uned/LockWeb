@@ -1,0 +1,16 @@
+{
+  "name": "lockweb",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Extension Manifest V3 khóa lớp giao diện trình duyệt bằng mật khẩu.",
+  "scripts": {
+    "test": "npm run test:unit && npm run test:static",
+    "test:unit": "node tests/service-worker.test.js",
+    "test:static": "node tests/static-check.js",
+    "test:e2e": "node tests/e2e.js",
+    "icons": "python tools/make-icons.py"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.64.1"
+  }
+}

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>Đã khóa · LockWeb</title>
+    <link rel="stylesheet" href="lock.css">
+    <script src="lock.js" defer></script>
+  </head>
+  <body>
+    <div class="scene">
+      <div class="scene-grid" aria-hidden="true"></div>
+      <div class="scene-glow" aria-hidden="true"></div>
+
+      <main class="lock-shell">
+        <header class="clock-panel">
+          <div class="clock" id="clock" aria-label="Giờ hiện tại">00:00</div>
+          <p class="date" id="date">Đang tải ngày…</p>
+        </header>
+
+        <section class="lock-card" id="lock-card" aria-labelledby="lock-title">
+          <div class="emblem" aria-hidden="true">
+            <span class="emblem-ring"></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4.5" y="10" width="15" height="10.5" rx="2.4"></rect>
+              <path d="M8.2 10V7.4a3.8 3.8 0 0 1 7.6 0V10"></path>
+              <circle cx="12" cy="15.2" r="1.25" fill="currentColor" stroke="none"></circle>
+              <path d="M12 16.4v1.4"></path>
+            </svg>
+          </div>
+
+          <p class="domain" id="domain">[ TRANG WEB ]</p>
+          <h1 class="sr-only" id="lock-title">Trình duyệt đang khóa</h1>
+
+          <div class="status-state loading-state" id="loading-state" role="status" aria-live="polite">
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Đang kiểm tra trạng thái khóa…</span>
+          </div>
+
+          <form class="unlock-form" id="unlock-form" novalidate hidden>
+            <label class="sr-only" for="password">Mật khẩu</label>
+            <div class="input-shell" id="input-shell">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="8.2" cy="15.8" r="3.2"></circle>
+                <path d="M10.6 13.4 19 5"></path>
+                <path d="m16.2 7.8 2 2"></path>
+                <path d="m13.8 10.2 1.7 1.7"></path>
+              </svg>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Nhập mật khẩu…"
+                autocomplete="off"
+                autocapitalize="none"
+                autocorrect="off"
+                spellcheck="false"
+                maxlength="1024"
+                enterkeyhint="go"
+              >
+              <button class="visibility-toggle" id="toggle-password" type="button" aria-label="Hiện mật khẩu" aria-pressed="false">
+                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path>
+                  <circle cx="12" cy="12" r="2.7"></circle>
+                </svg>
+                <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden>
+                  <path d="m3 3 18 18"></path>
+                  <path d="M10.6 6.2A9.8 9.8 0 0 1 12 6c6 0 9.5 6 9.5 6a15.5 15.5 0 0 1-3.1 3.8"></path>
+                  <path d="M6.5 6.9C4 8.5 2.5 12 2.5 12s3.5 6 9.5 6a9.7 9.7 0 0 0 4.1-.9"></path>
+                  <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path>
+                </svg>
+              </button>
+            </div>
+
+            <p class="helper" id="helper">Nhập mật khẩu để tiếp tục</p>
+            <p class="form-message" id="error-message" role="alert" aria-live="assertive" hidden></p>
+
+            <button class="primary-button" id="unlock-button" type="submit">
+              <span class="button-spinner" aria-hidden="true"></span>
+              <span id="unlock-label">Mở khóa</span>
+            </button>
+          </form>
+
+          <div class="status-state setup-state" id="setup-state" hidden>
+            <div class="state-icon neutral" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 8v4"></path>
+                <path d="M12 16h.01"></path>
+              </svg>
+            </div>
+            <p class="state-title">Chưa có mật khẩu</p>
+            <p class="state-copy">LockWeb chưa được cấu hình mật khẩu nên không thể mở khóa bằng mật khẩu.</p>
+            <button class="primary-button" id="open-options-button" type="button">Mở Cài đặt</button>
+          </div>
+
+          <div class="status-state success-state" id="success-state" hidden>
+            <div class="state-icon success" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 12.5 4.2 4.2L19 7"></path>
+              </svg>
+            </div>
+            <p class="state-title" id="success-title">Đã mở khóa</p>
+            <p class="state-copy">Bạn có thể tiếp tục sử dụng trình duyệt.</p>
+            <div class="success-actions" id="success-actions" hidden>
+              <button class="secondary-button" id="close-tab-button" type="button">Đóng tab này</button>
+              <button class="primary-button compact" id="success-options-button" type="button">Mở Cài đặt</button>
+            </div>
+          </div>
+
+          <div class="status-state fatal-state" id="fatal-state" hidden>
+            <div class="state-icon danger" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.2 4.1 2.9 17a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.8 4.1a2 2 0 0 0-3.6 0Z"></path>
+                <path d="M12 9v4"></path>
+                <path d="M12 17h.01"></path>
+              </svg>
+            </div>
+            <p class="state-title">Không thể khởi tạo màn hình khóa</p>
+            <p class="state-copy" id="fatal-copy">Hãy đóng tab này, mở lại một trang web khác và thử lại.</p>
+          </div>
+
+          <footer class="card-footer">
+            <span class="status-dot" aria-hidden="true"></span>
+            Xác thực cục bộ · Mật khẩu không được gửi tới trang web
+          </footer>
+        </section>
+
+        <p class="below-card">Lớp khóa giao diện của LockWeb chỉ có hiệu lực trong trình duyệt này.</p>
+      </main>
+    </div>
+  </body>
+</html>

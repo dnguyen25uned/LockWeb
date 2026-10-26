@@ -1,0 +1,8 @@
+node_modules/
+.npm-cache/
+.pw-*/
+.test-profile*/
+.edge-shot*/
+.tmp/
+.preview/
+*.log
